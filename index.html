@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images\quote.png" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href ="style.css">
+    <title>Quotes Baba | Motivational Quotes | Daily Quotes | Rajat Mittal  </title>
+</head>
+<body>
+    <!-- <div id="quotes"></div>
+    <div id="author"></div>        
+    <button id = "newQ">New Quotes</button>
+    <button id = "tweetMe">Tweet Now</button> -->
+    
+    <div class="container">
+        <div class="inner" data-aos="zoom-in">
+            <div class="box">
+                <p class="number">
+                    <img src="images/logo.png" alt="Tweet" title = "tweetMe" id="tweetMe">
+                </p>
+
+                <div class="text">
+                    <i class="start-quote fas fa-quote-left"></i>
+                    <p id="quotes" class="quote"></p>
+                    <p id="author" class="author"></p>
+                </div>
+                <label class="button">
+                    <button id="newQ">New Quotes</button>
+                </label>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+        const quotes = document.getElementById("quotes");
+        const author = document.getElementById("author");
+        const newQ = document.getElementById("newQ");
+        const tweetMe = document.getElementById("tweetMe");
+        let realData = "";
+        let quotesData = "";
+
+        const tweetNow = () => {
+            let tweetPost =`https://twitter.com/intent/tweet?text=${quotesData.text} By -  ${quotesData.author} `;
+            window.open(tweetPost);
+        }
+
+        const getNewQuotes = () => {
+            let randNum = Math.floor(Math.random() * 1000);
+            // console.log(realData[randNum].text);
+            // console.log(realData[randNum].author);
+            quotesData = realData[randNum];
+            quotes.innerText = `${quotesData.text}`;
+            quotesData.author ==null ?
+            author.innerText ="Unknown Author" :
+            author.innerText = `${quotesData.author}`;
+        };
+
+        const getQuotes = async () => {
+            const api = "https://type.fit/api/quotes";
+            try {
+                let data = await fetch(api);
+                realData = await data.json();
+                getNewQuotes();
+                
+                
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        tweetMe.addEventListener("click", tweetNow);
+        newQ.addEventListener("click", getNewQuotes);
+        getQuotes();
+        
+    </script>
+</body>
+</html>
