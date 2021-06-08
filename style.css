@@ -130,3 +130,20 @@ button:hover{
     color: #fff;
     border: none;
 }
+
+/* Media Queries: Tablet Landscape */
+@media screen and (max-width: 1060px) {
+    .container { width:67%; }
+    .box { width:100%; margin-left:3%;}  
+}
+
+/* Media Queries: Tabled Portrait */
+@media screen and (max-width: 768px) {
+    .container { width:100%; }
+    .box { width:100%; margin:0; border:none; }
+}
+
+@media screen and (max-width: 572px) {
+    .container { width:100%; height:100%; }
+    .box { width:100%; margin-left:3%;}  
+}
